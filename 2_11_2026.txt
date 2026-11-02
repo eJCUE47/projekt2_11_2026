@@ -1,0 +1,79 @@
+
+#include <Adafruit_LiquidCrystal.h>
+
+Adafruit_LiquidCrystal lcd_1(0);
+
+void setup()
+{
+  lcd_1.begin(16, 2);
+  lcd_1.setBacklight(1);
+}
+
+// Przewijanie tekstu od prawej do lewej
+void przewijajTekst(String tekst1, String tekst2)
+{
+  lcd_1.clear();
+
+  // Wyświetlanie pełnego tekstu
+  lcd_1.setCursor(0, 0);
+  lcd_1.print(tekst1);
+
+  lcd_1.setCursor(0, 1);
+  lcd_1.print(tekst2);
+
+  delay(2000);
+
+  // Przesuwanie w lewo
+  for (int i = 0; i < 40; i++)
+  {
+    lcd_1.scrollDisplayLeft();
+    delay(150);
+  }
+
+  delay(500);
+}
+
+// Główna reklama
+void loop()
+{
+  // 1. Nazwa lokalu
+  lcd_1.clear();
+  lcd_1.setCursor(0, 0);
+  lcd_1.print("Comilla Kebab &");
+  lcd_1.setCursor(0, 1);
+  lcd_1.print("Grill Ostrzeszow");
+
+  delay(3000);
+
+  // 2. Obrót w lewo
+  for (int i = 0; i < 40; i++)
+  {
+    lcd_1.scrollDisplayLeft();
+    delay(150);
+  }
+
+  delay(500);
+
+  // 3. Powrót w prawo
+  for (int i = 0; i < 40; i++)
+  {
+    lcd_1.scrollDisplayRight();
+    delay(150);
+  }
+
+  delay(1000);
+
+  // 4. Nowe hasła reklamowe
+
+  przewijajTekst("SOCZYSTY KEBAB", "ZAPRASZAMY!");
+
+  przewijajTekst("SWIEZE MIESO", "WYJATKOWY SMAK");
+
+  przewijajTekst("FRYTKI I SOSY", "PYCHA!");
+
+  przewijajTekst("GORACY KEBAB", "NA KAZDA PORE");
+
+  przewijajTekst("COMILLA KEBAB", "OSTRZESZOW");
+
+  delay(1500);
+}
